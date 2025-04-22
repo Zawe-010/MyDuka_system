@@ -109,3 +109,22 @@ print("Fetching data after modified func.\n",sales)
 # insert_products_method(sales_values)
 # sales = fetch_data('sales')
 # print("Fetching prods method:\n",sales)
+
+# Method 3 - Insert data into multiple tables with varying number of columns
+# Insert  into <table_name>(columns)values()
+# def insert_data(table,columns,values):
+#     cur.execute(f"INSERT INTO{table} ({columns}) values{values}")
+#     conn.commit()
+
+# table = 'products'
+# columns = "name, buying_price, selling_price, stock_quantity"
+# values = ("Phone", 8000,12000,10)
+
+# table_2 = 'sales'
+# columns = "pid, quantity, created_at"
+# sales_values = (12,3,current_datetime)
+# insert_data(table, columns,values)
+
+# products = fetch_data('products')
+# print("Data from last method:\n",products)
+
