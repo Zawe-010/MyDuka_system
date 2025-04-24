@@ -15,11 +15,11 @@ def home():
 
 @app.route('/products')
 def products():
-    return "My Products"
+    return render_template("products.html")
 
 @app.route('/sales')
 def sales():
-    return "My Sales"
+    return render_template ("sales.html")
 
 # Running your application
 app.run(debug=True)
