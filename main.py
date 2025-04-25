@@ -11,15 +11,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    numbers = [1,2,3,4,5]
+    return render_template("index.html", numbers = numbers)
 
 @app.route('/products')
 def products():
-    return render_template("products.html")
+    products = [
+        {'name': 'Laptop', 'price': 999.99},
+        {'name': 'Smartphone', 'price': 699.99},
+        {'name': 'Headphones', 'price': 199.99},
+    ]
+    return render_template("products.html", products = products)
 
 @app.route('/sales')
 def sales():
-    return render_template ("sales.html")
+    return render_template("sales.html")
 
 # Running your application
 app.run(debug=True)

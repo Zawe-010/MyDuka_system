@@ -7,7 +7,9 @@
 </head>
 <body>
     <div>
-        <p>This is my home page provided by Flask.</p>
+      {% for number in numbers %}
+      <li>{{number}}</li>
+      {% endfor %}
     </div>
 </body>
 </html>

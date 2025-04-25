@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <p>This is my products page provided by Flask.</p>
+    <div class="container">
+        {% for product in products %}
+        <li>{{product}}</li>
+        {% endfor %}
+    </div>
 </body>
 </html>
