@@ -15,20 +15,14 @@ def fetch_products():
     cur.execute("SELECT * FROM products;")
 
     products = cur.fetchall()
-
-    print("Products:")
-    for product in products:
-        print(product)
+    return products
 
 # Fetching sales
 def fetch_sales():
     cur.execute("SELECT * FROM sales;")
 
     sales = cur.fetchall()
-
-    print("\nSales:")
-    for sale in sales:
-        print(sale)
+    return sales
 
 # A query inserting a product
 def insert_product():
@@ -36,7 +30,7 @@ def insert_product():
     # Saving operations
     conn.commit()
     return "Products Inserted"
-# # A query inserting a sale
+# A query inserting a sale
 def insert_sale():
     cur.execute(f"INSERT INTO sales(pid,quantity,created_at) VALUES(3,15,'{current_datetime}');")
     # Saving operations

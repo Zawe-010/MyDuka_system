@@ -1,5 +1,7 @@
 # Importing flask to use it
 from flask import Flask , render_template
+from database import fetch_products,fetch_sales
+
 
 # Instantiate your application - initialization of Flask
 # A flask instance
@@ -16,16 +18,13 @@ def home():
 
 @app.route('/products')
 def products():
-    products = [
-        {'name': 'Laptop', 'price': 999.99},
-        {'name': 'Smartphone', 'price': 699.99},
-        {'name': 'Headphones', 'price': 199.99},
-    ]
+    products = fetch_products()
     return render_template("products.html", products = products)
 
 @app.route('/sales')
 def sales():
-    return render_template("sales.html")
+    sales = fetch_sales()
+    return render_template("sales.html", sales = sales)
 
 # Running your application
 app.run(debug=True)
