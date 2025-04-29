@@ -1,35 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MyDuka Sales</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container">
-        This is my Sales page.
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Sales ID</th>
-                    <th scope="col">Product ID</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for sale in sales %}
-                <tr>
-                    <td>{{sale[0]}}</td>
-                    <td>{{sale[1]}}</td>
-                    <td>{{sale[2]}}</td>
-                    <td>{{sale[3]}}</td>
-                {% endfor %}
-                </tr>
-            </tbody>
-        </table>
+    <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">MyDuka</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link active" href="/">Home</a>
+                        <a class="nav-link" href="/products">Products</a>
+                        <a class="nav-link" href="/sales">Sales</a>
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <br>
+        <div>
+           <p>This is my Sales Page</p> 
+        </div>
+        <!-- Button trigger modal -->
+        <div class="mt-4 mb-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Sale
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <form action="/add_sales" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Sale</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="productId" class="form-label">Product ID</label>
+                                <input type="text" class="form-control" name="p-id" id="productId" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" name="quantity" id="quantity" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="createdAt" class="form-label">Created At</label>
+                                <input type="datetime" class="form-control" name="created_at" id="createdAt"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Table -->
+        <h3 class="mt-4">Sales Data</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Sales ID</th>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{sale[0]}}</td>
+                        <td>{{sale[1]}}</td>
+                        <td>{{sale[2]}}</td>
+                        <td>{{sale[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
+    <!-- Bootstrap JS Bundle (Required for modal functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
