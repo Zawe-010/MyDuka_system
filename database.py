@@ -122,3 +122,49 @@ print("Fetching data after modified func.\n",sales)
 # products = fetch_data('products')
 # print("Data from last method:\n",products)
 
+def profit_per_product():
+    cur.execute("""
+        SELECT products.name, 
+               SUM((products.selling_price - products.buying_price) * sales.quantity) AS profit 
+        FROM products 
+        JOIN sales ON products.id = sales.pid 
+        GROUP BY products.name;
+    """)
+    profit_per_product = cur.fetchall()
+    return profit_per_product
+
+# profit_product = profit_per_product()
+# print(profit_product)
+
+def profit_per_day():
+    cur.execute("""
+        SELECT sales.created_at, 
+               SUM((products.selling_price - products.buying_price) * sales.quantity) AS profit 
+        FROM products 
+        JOIN sales ON products.id = sales.pid 
+        GROUP BY sales.created_at;
+    """)
+    profit_per_day = cur.fetchall()
+    return profit_per_day
+
+def sales_per_product():
+    cur.execute("""
+        SELECT products.name, 
+               SUM(products.selling_price * sales.quantity) AS revenue
+        FROM products 
+        JOIN sales ON products.id = sales.pid 
+        GROUP BY products.name;
+    """)
+    sales_per_product = cur.fetchall()
+    return sales_per_product
+
+def sales_per_day():
+    cur.execute("""
+        SELECT sales.created_at, 
+               SUM(products.selling_price * sales.quantity) AS revenue
+        FROM sales 
+        JOIN products ON products.id = sales.pid 
+        GROUP BY sales.created_at;
+    """)
+    sales_per_day = cur.fetchall()
+    return sales_per_day

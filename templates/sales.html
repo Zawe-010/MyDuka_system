@@ -46,32 +46,32 @@
             <div class="modal-dialog">
                 <div class="modal-content">
 
-                    <form action="/add_sales" method="post">
+                    <form action="/make_sales" method="post">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Add Sale</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <br>
+                        <div>
+                            <select name="p-id">
+                                <option value="">Select a Product</option>
+                                {% for product in products %}
+                                <option value={{product[0]}}>{{product[1]}}</option>
+                                {% endfor%}
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="">Quantity</label>
+                            <input type="text" name="quantity">
+                        </div>
+                        <br>
+                        <div>
 
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="productId" class="form-label">Product ID</label>
-                                <input type="text" class="form-control" name="p-id" id="productId" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="quantity" class="form-label">Quantity</label>
-                                <input type="number" class="form-control" name="quantity" id="quantity" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="createdAt" class="form-label">Created At</label>
-                                <input type="datetime" class="form-control" name="created_at" id="createdAt"
-                                    required>
-                            </div>
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Make Sale</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -81,7 +81,7 @@
         </div>
 
         <!-- Sales Table -->
-        <h3 class="mt-4">Sales Data</h3>
+        <!-- <h3 class="mt-4">Sales Data</h3>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -103,7 +103,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
+        </div> -->
 
     </div>
 

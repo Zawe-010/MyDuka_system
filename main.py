@@ -1,6 +1,6 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for
-from database import fetch_products,fetch_sales,insert_products,insert_sales
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day
 
 
 # Instantiate your application - initialization of Flask
@@ -32,25 +32,29 @@ def add_products():
         insert_products(new_product)
         return redirect(url_for('products'))
     
-
-@app.route('/add_sales', methods=['POST'])
-def add_sales():
-    if request.method == 'POST' : 
-        pid= request.form['p-id']
-        quantity = request.form['quantity']
-        created_at = request.form['created_at']
-        new_sale = (pid, quantity, created_at )
-        insert_sales(new_sale)
-        return redirect(url_for('sales'))
-
 @app.route('/sales')
 def sales():
     sales = fetch_sales()
-    return render_template("sales.html", sales = sales)
+    products = fetch_products()
+    return render_template("sales.html", sales = sales, products = products)
 
+@app.route('/make_sales', methods=['POST'])
+def make_sales():
+    if request.method == 'POST' : 
+        product_id= request.form['p-id']
+        quantity = request.form['quantity']
+        new_sale = (product_id, quantity)
+        insert_sales(new_sale)
+        return redirect(url_for('sales'))
+    
 @app.route('/dashboard')
 def dashboard():
-    return render_template("dashboard.html")
+    profit_product = profit_per_product()
+    profit_day = profit_per_day()
+    sales_product = sales_per_product()
+    sales_day = sales_per_day()
+    return render_template("dashboard.html",profit_product = profit_product, profit_day = profit_day, sales_product = sales_product, sales_day = sales_day)
+
 
 # Running your application
 app.run(debug=True)
