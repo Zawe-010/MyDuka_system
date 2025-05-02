@@ -50,10 +50,22 @@ def make_sales():
 @app.route('/dashboard')
 def dashboard():
     profit_product = profit_per_product()
-    profit_day = profit_per_day()
     sales_product = sales_per_product()
+    profit_day = profit_per_day()
     sales_day = sales_per_day()
-    return render_template("dashboard.html",profit_product = profit_product, profit_day = profit_day, sales_product = sales_product, sales_day = sales_day)
+
+    # List Comprehension
+    product_name = [i[0] for i in profit_product]
+    p_profit = [float(i[1]) for i in profit_product]
+    p_sales = [float(i[1]) for i in sales_product]
+
+     # Day Metrics-data
+    date = [i[0].strftime('%Y-%m-%d') for i in profit_day]
+    p_day = [float(i[1]) for i in profit_day]
+    s_day = [float(i[1]) for i in sales_day]
+    return render_template("dashboard.html",
+                           product_name = product_name, p_profit = p_profit, p_sales = p_sales,
+                           date = date, p_day = p_day, s_day = s_day)
 
 
 # Running your application

@@ -138,11 +138,11 @@ def profit_per_product():
 
 def profit_per_day():
     cur.execute("""
-        SELECT sales.created_at, 
+        SELECT DATE(sales.created_at) as date, 
                SUM((products.selling_price - products.buying_price) * sales.quantity) AS profit 
         FROM products 
         JOIN sales ON products.id = sales.pid 
-        GROUP BY sales.created_at;
+        GROUP BY DATE(sales.created_at);
     """)
     profit_per_day = cur.fetchall()
     return profit_per_day
@@ -160,11 +160,11 @@ def sales_per_product():
 
 def sales_per_day():
     cur.execute("""
-        SELECT sales.created_at, 
+        SELECT DATE(sales.created_at) as date, 
                SUM(products.selling_price * sales.quantity) AS revenue
         FROM sales 
         JOIN products ON products.id = sales.pid 
-        GROUP BY sales.created_at;
+        GROUP BY DATE(sales.created_at);
     """)
     sales_per_day = cur.fetchall()
     return sales_per_day
