@@ -1,87 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyDuka Sales</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
+{% block content %}
+<!-- Page-specific content goes here -->
 
-<body>
-    <div class="container">
-    <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">MyDuka</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link active" href="/">Home</a>
-                        <a class="nav-link" href="/products">Products</a>
-                        <a class="nav-link" href="/sales">Sales</a>
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
+<div class="container">
+    <!-- Navbar (This will be inherited from base.html) -->
+
+    <br>
+    <div>
+        <p>This is my Sales Page</p>
+    </div>
+
+    <!-- Button trigger modal -->
+    <div class="mt-4 mb-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Sale
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form action="/make_sales" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Sale</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-            </div>
-        </nav>
-        <br>
-        <div>
-           <p>This is my Sales Page</p> 
-        </div>
-        <!-- Button trigger modal -->
-        <div class="mt-4 mb-4">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add Sale
-            </button>
-        </div>
+                    <br>
+                    <div>
+                        <select name="p-id">
+                            <option value="">Select a Product</option>
+                            {% for product in products %}
+                            <option value="{{ product[0] }}">{{ product[1] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="">Quantity</label>
+                        <input type="text" name="quantity">
+                    </div>
+                    <br>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Make Sale</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
 
-                    <form action="/make_sales" method="post">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Sale</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <br>
-                        <div>
-                            <select name="p-id">
-                                <option value="">Select a Product</option>
-                                {% for product in products %}
-                                <option value={{product[0]}}>{{product[1]}}</option>
-                                {% endfor%}
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="">Quantity</label>
-                            <input type="text" name="quantity">
-                        </div>
-                        <br>
-                        <div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Make Sale</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Sales Table -->
-        <!-- <h3 class="mt-4">Sales Data</h3>
+    <!-- Sales Table (Optional section, if you want to display sales data) -->
+    <!-- 
+        <h3 class="mt-4">Sales Data</h3>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -94,21 +69,17 @@
                 </thead>
                 <tbody>
                     {% for sale in sales %}
-                    <tr>
-                        <td>{{sale[0]}}</td>
-                        <td>{{sale[1]}}</td>
-                        <td>{{sale[2]}}</td>
-                        <td>{{sale[3]}}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ sale[0] }}</td>
+                            <td>{{ sale[1] }}</td>
+                            <td>{{ sale[2] }}</td>
+                            <td>{{ sale[3] }}</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div> -->
+        </div>
+        -->
+</div>
 
-    </div>
-
-    <!-- Bootstrap JS Bundle (Required for modal functionality) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+{% endblock %}
