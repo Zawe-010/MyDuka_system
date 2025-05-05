@@ -60,7 +60,7 @@ def dashboard():
     p_sales = [float(i[1]) for i in sales_product]
 
      # Day Metrics-data
-    date = [i[0].strftime('%Y-%m-%d') for i in profit_day]
+    date = [str(i[0]) for i in profit_day]
     p_day = [float(i[1]) for i in profit_day]
     s_day = [float(i[1]) for i in sales_day]
     return render_template("dashboard.html",
