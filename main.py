@@ -1,11 +1,13 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for
-from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day
-
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user
+from flask_bcrypt import Bcrypt
 
 # Instantiate your application - initialization of Flask
 # A flask instance
 app = Flask(__name__)
+# A bycrypt instance
+bcrypt = Bcrypt(app)
 
 # __name__ - is a special built in variable
 # It represents the name of the current file where your application is built
@@ -67,6 +69,25 @@ def dashboard():
                            product_name = product_name, p_profit = p_profit, p_sales = p_sales,
                            date = date, p_day = p_day, s_day = s_day)
 
+@app.route('/register', methods = 'POST')
+def register():
+    full_name = request.form['full_name']
+    email = request.form['email']
+    phone_number = request.form['phone']
+    password = request.form['password']
 
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    user = check_user(email)
+    if user == None:
+        new_user = (full_name, email, phone_number, hashed_password)
+        insert_user (new_user)
+        return redirect (url_for('login'))
+    else:
+        pass 
+    return render_template('register.html')
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
 # Running your application
 app.run(debug=True)

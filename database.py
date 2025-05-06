@@ -168,3 +168,21 @@ def sales_per_day():
     """)
     sales_per_day = cur.fetchall()
     return sales_per_day
+
+def check_user(email):
+    cur.execute("""
+        SELECT *
+        FROM users 
+        WHERE email = %s;
+    """, (email,))
+    user = cur.fetchall()
+    return user  
+
+def insert_user(user_details):
+    insert_3=("""
+        INSERT INTO users (full_name, email, phone_number, password)
+        VALUES (%s, %s, %s, %s);
+    """)
+    cur.execute(insert_3,user_details)
+    conn.commit()
+    cur.close
