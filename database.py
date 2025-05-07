@@ -8,7 +8,7 @@ conn = psycopg2.connect(user="postgres", password="Zawadi@2006#",host="localhost
 cur = conn.cursor()
 
 current_datetime = datetime.now()
-print("This is the time and date now: ",current_datetime)
+
 
 # Query
 def fetch_products():
@@ -39,8 +39,6 @@ def insert_sale():
 
 product = insert_product()
 sale = insert_sale()
-print(sale)
-print(product)
 
 
 fetch_products()
@@ -69,7 +67,7 @@ def insert_products(values):
 product_values = ("Meat", 120, 150, 200)
 insert_products(product_values)
 products = fetch_data('products')
-print("Fetching data after modified func.\n",products)
+
 
 def insert_sales(values):
     insert_2 = "INSERT INTO sales(pid, quantity, created_at) VALUES(%s, %s, %s)"
@@ -80,7 +78,7 @@ def insert_sales(values):
 sales_values = (4, 20, current_datetime)
 insert_sales(sales_values)
 sales = fetch_data('sales')
-print("Fetching data after modified func.\n",sales)
+
 
 # Method 2 (take values as parameter but doesn't use placeholders).
 # Instead we replace placeholders with {values} parameter in a formatted string.
@@ -170,19 +168,13 @@ def sales_per_day():
     return sales_per_day
 
 def check_user(email):
-    cur.execute("""
-        SELECT *
-        FROM users 
-        WHERE email = %s;
-    """, (email,))
-    user = cur.fetchall()
+    query = "SELECT * FROM users WHERE email = %s;"
+    cur.execute(query,(email,))
+    user = cur.fetchone()
     return user  
 
 def insert_user(user_details):
-    insert_3=("""
-        INSERT INTO users (full_name, email, phone_number, password)
-        VALUES (%s, %s, %s, %s);
-    """)
-    cur.execute(insert_3,user_details)
+    query = "insert into users(full_name,email,phone_number,password)values(%s,%s,%s,%s)"
+    cur.execute(query,user_details)
     conn.commit()
-    cur.close
+    
