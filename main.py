@@ -1,11 +1,14 @@
 # Importing flask to use it
-from flask import Flask , render_template, request, redirect, url_for
+from flask import Flask , render_template, request, redirect, url_for, flash, session
 from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user
 from flask_bcrypt import Bcrypt
+from functools import wraps
 
 # Instantiate your application - initialization of Flask
 # A flask instance
 app = Flask(__name__)
+
+app.secret_key = 'jbl2468'
 # A bycrypt instance
 bcrypt = Bcrypt(app)
 
@@ -18,7 +21,20 @@ def home():
     numbers = [1,2,3,4,5]
     return render_template("index.html", numbers = numbers)
 
+def login_required(f):
+    @wraps(f)
+    def protected(*args,**kwargs):
+        if 'email' not in session:
+            return redirect(url_for('login'))
+        return f(*args,**kwargs)
+    return protected
+@app.route('/test')
+def test():
+    flash ('Testing flash messaging','info')
+    return render_template('sample.html')
+
 @app.route('/products')
+@login_required
 def products():
     products = fetch_products()
     return render_template("products.html", products = products)
@@ -35,6 +51,7 @@ def add_products():
         return redirect(url_for('products'))
     
 @app.route('/sales')
+@login_required
 def sales():
     sales = fetch_sales()
     products = fetch_products()
@@ -50,6 +67,7 @@ def make_sales():
         return redirect(url_for('sales'))
     
 @app.route('/dashboard')
+@login_required
 def dashboard():
     profit_product = profit_per_product()
     sales_product = sales_per_product()
@@ -96,12 +114,15 @@ def login():
 
         user = check_user(email)
         if not user:
+            flash('User not found,please register','danger')
             return redirect(url_for('register'))
         else:
             if bcrypt.check_password_hash(user[-1],password):
+                flash('Logged in','success')
+                session['email'] = email
                 return redirect(url_for('dashboard'))
             else:
-                print('Wrong password')
+                flash('Password incorrect','danger')
     return render_template("login.html")
 # Running your application
 app.run(debug=True)
