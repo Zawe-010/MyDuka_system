@@ -28,10 +28,6 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args,**kwargs)
     return protected
-@app.route('/test')
-def test():
-    flash ('Testing flash messaging','info')
-    return render_template('sample.html')
 
 @app.route('/products')
 @login_required
