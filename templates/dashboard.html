@@ -3,11 +3,18 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<h2>This is my Dashboard Page</h2>
-
-<p>{{ product_name }}</p>
-<p>{{ p_profit }}</p>
-<p>{{ p_sales }}</p>
+<!-- Dashboard Description -->
+<div class="mb-4">
+    <p class="fs-5">
+        Welcome to your Dashboard! Here you can view analytics for product sales, profit, and overall performance.
+        Use the charts below to analyze the sales and profit data per product, as well as a daily breakdown of sales and
+        profit.
+    </p>
+    <p class="fs-5">
+        The data shown is up-to-date and reflects the most recent transactions in your store. You can use this data to
+        make informed decisions on stock, pricing, and promotions.
+    </p>
+</div>
 
 <canvas id="bar-chart" width="800" height="450"></canvas>
 <canvas id="line-chart" width="800" height="450"></canvas>

@@ -7,12 +7,12 @@
 
     <!-- Page Description -->
     <div class="mb-4">
-        <p>
+        <p class="fs-5">
             Welcome to the Products Page. This section allows you to manage your product inventory.
             You can view all products currently available in stock, along with details such as
             buying price, selling price, and quantity.
         </p>
-        <p>
+        <p class="fs-5">
             To add a new product, click the <strong>"Add Product"</strong> button. A form will appear
             in a modal where you can enter the necessary product information. Once submitted, the
             product will be added to the list below.
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Product
     </button>
 
@@ -37,22 +37,22 @@
 
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="productName" class="form-label">Product Name</label>
+                            <label for="productName" class="form-label fs-5">Product Name</label>
                             <input type="text" class="form-control" name="p-name" id="productName" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="buyingPrice" class="form-label">Buying Price</label>
+                            <label for="buyingPrice" class="form-label fs-5">Buying Price</label>
                             <input type="number" class="form-control" name="b-price" id="buyingPrice" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="sellingPrice" class="form-label">Selling Price</label>
+                            <label for="sellingPrice" class="form-label fs-5">Selling Price</label>
                             <input type="number" class="form-control" name="s-price" id="sellingPrice" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="stockQuantity" class="form-label">Stock Quantity</label>
+                            <label for="stockQuantity" class="form-label fs-5">Stock Quantity</label>
                             <input type="number" class="form-control" name="quantity" id="stockQuantity" required>
                         </div>
                     </div>
@@ -70,26 +70,26 @@
     <br>
 
     <!-- Products Table -->
-    <h3>Products Data</h3>
+    <h3 class="text-center fs-3">Products Data</h3>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Product ID</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Buying Price</th>
-                    <th scope="col">Selling Price</th>
-                    <th scope="col">Stock Quantity</th>
+                    <th scope="col" class="fs-6">Product ID</th>
+                    <th scope="col" class="fs-6">Product Name</th>
+                    <th scope="col" class="fs-6">Buying Price</th>
+                    <th scope="col" class="fs-6">Selling Price</th>
+                    <th scope="col" class="fs-6">Stock Quantity</th>
                 </tr>
             </thead>
             <tbody>
                 {% for product in products %}
                 <tr>
-                    <td>{{ product[0] }}</td>
-                    <td>{{ product[1] }}</td>
-                    <td>{{ product[2] }}</td>
-                    <td>{{ product[3] }}</td>
-                    <td>{{ product[4] }}</td>
+                    <td class="fs-6">{{ product[0] }}</td>
+                    <td class="fs-6">{{ product[1] }}</td>
+                    <td class="fs-6">{{ product[2] }}</td>
+                    <td class="fs-6">{{ product[3] }}</td>
+                    <td class="fs-6">{{ product[4] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

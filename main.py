@@ -119,5 +119,6 @@ def login():
             else:
                 flash('Password incorrect','danger')
     return render_template("login.html")
+
 # Running your application
 app.run(debug=True)

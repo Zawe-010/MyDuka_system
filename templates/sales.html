@@ -8,11 +8,11 @@
 
     <!-- Page Description -->
     <div class="mb-4">
-        <p>
+        <p class="fs-5">
             Welcome to the Sales Page. This section allows you to record new sales transactions.
             You can select a product from your inventory and specify the quantity sold.
         </p>
-        <p>
+        <p class="fs-5">
             To add a new sale, click the <strong>"Add Sale"</strong> button. A modal form will appear where
             you can choose a product and enter the quantity sold. Once submitted, the sale will be processed
             and recorded in your sales data.
@@ -38,7 +38,7 @@
                     </div>
                     <br>
                     <div>
-                        <select name="p-id">
+                        <select name="p-id" class="form-control">
                             <option value="">Select a Product</option>
                             {% for product in products %}
                             <option value="{{ product[0] }}">{{ product[1] }}</option>
@@ -47,8 +47,8 @@
                     </div>
                     <br>
                     <div>
-                        <label for="">Quantity</label>
-                        <input type="text" name="quantity">
+                        <label for="" class="fs-6">Quantity</label>
+                        <input type="text" name="quantity" class="form-control">
                     </div>
                     <br>
 
@@ -63,31 +63,29 @@
     </div>
 
     <!-- Sales Table -->
-    <!-- 
-        <h3 class="mt-4">Sales Data</h3>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Sales ID</th>
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Created At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for sale in sales %}
-                        <tr>
-                            <td>{{ sale[0] }}</td>
-                            <td>{{ sale[1] }}</td>
-                            <td>{{ sale[2] }}</td>
-                            <td>{{ sale[3] }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    -->
+    <h3 class="mt-4 fs-3 text-center">Sales Data</h3> 
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="fs-6">Sales ID</th>
+                    <th scope="col" class="fs-6">Product ID</th>
+                    <th scope="col" class="fs-6">Quantity</th>
+                    <th scope="col" class="fs-6">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                <tr>
+                    <td class="fs-6">{{ sale[0] }}</td>
+                    <td class="fs-6">{{ sale[1] }}</td>
+                    <td class="fs-6">{{ sale[2] }}</td>
+                    <td class="fs-6">{{ sale[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
