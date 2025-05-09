@@ -8,7 +8,6 @@ from functools import wraps
 # A flask instance
 app = Flask(__name__)
 
-app.secret_key = 'jbl2468'
 # A bycrypt instance
 bcrypt = Bcrypt(app)
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyDuka</title>
+    <title>{% block title %} {% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -36,9 +36,9 @@
             {% if messages %}
         
             {% for category , message in messages %}
-            <div class="alert alert-{{category}} alert-dismissable fade show" role="alert">
+            <div class="alert alert-{{category}} alert-dismissable d-flex align-items-center justify-content-between" role="alert">
                 {{message}}
-                <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
             </div>
             {% endfor %}
         
