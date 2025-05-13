@@ -51,10 +51,6 @@
                             <input type="number" class="form-control" name="s-price" id="sellingPrice" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="stockQuantity" class="form-label fs-5">Stock Quantity</label>
-                            <input type="number" class="form-control" name="quantity" id="stockQuantity" required>
-                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -79,7 +75,6 @@
                     <th scope="col" class="fs-6">Product Name</th>
                     <th scope="col" class="fs-6">Buying Price</th>
                     <th scope="col" class="fs-6">Selling Price</th>
-                    <th scope="col" class="fs-6">Stock Quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,7 +84,6 @@
                     <td class="fs-6">{{ product[1] }}</td>
                     <td class="fs-6">{{ product[2] }}</td>
                     <td class="fs-6">{{ product[3] }}</td>
-                    <td class="fs-6">{{ product[4] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

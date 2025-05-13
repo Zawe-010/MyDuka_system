@@ -24,25 +24,32 @@ def fetch_sales():
     sales = cur.fetchall()
     return sales
 
+# Fetching sales
+def fetch_stock():
+    cur.execute("SELECT * FROM stock;")
+
+    stock = cur.fetchall()
+    return stock
+
 # A query inserting a product
-def insert_product():
-    cur.execute("INSERT INTO products(name,buying_price,selling_price,stock_quantity) VALUES('Milk',50,60,100);")
-    # Saving operations
-    conn.commit()
-    return "Products Inserted"
-# A query inserting a sale
-def insert_sale():
-    cur.execute(f"INSERT INTO sales(pid,quantity,created_at) VALUES(3,15,'{current_datetime}');")
-    # Saving operations
-    conn.commit()
-    return "Sales made"
+# def insert_product():
+#     cur.execute("INSERT INTO products(name,buying_price,selling_price) VALUES('Milk',50,60);")
+#     # Saving operations
+#     conn.commit()
+#     return "Products Inserted"
+# # A query inserting a sale
+# def insert_sale():
+#     cur.execute(f"INSERT INTO sales(pid,quantity,created_at) VALUES(3,15,'{current_datetime}');")
+#     # Saving operations
+#     conn.commit()
+#     return "Sales made"
 
-product = insert_product()
-sale = insert_sale()
+# product = insert_product()
+# sale = insert_sale()
 
 
-fetch_products()
-fetch_sales()
+# fetch_products()
+# fetch_sales()
 
 # Task(for fetch)
 
@@ -60,13 +67,13 @@ def fetch_data(table):
 # Method 1(takes values as parameters)
 def insert_products(values):
     # Use of placeholders
-    insert = "INSERT INTO products(name, buying_price, selling_price, stock_quantity) VALUES(%s,%s,%s,%s)"
+    insert = "INSERT INTO products(name, buying_price, selling_price) VALUES(%s,%s,%s)"
     cur.execute(insert, values)
     conn.commit()
 
-product_values = ("Meat", 120, 150, 200)
-insert_products(product_values)
-products = fetch_data('products')
+# product_values = ("Meat", 120, 150)
+# insert_products(product_values)
+# products = fetch_data('products')
 
 
 def insert_sales(values):
@@ -74,10 +81,15 @@ def insert_sales(values):
     cur.execute(insert_2, values)
     conn.commit()
 
-# Fix datetime string formatting
-sales_values = (4, 20, current_datetime)
-insert_sales(sales_values)
-sales = fetch_data('sales')
+# # Fix datetime string formatting
+# sales_values = (4, 20, current_datetime)
+# insert_sales(sales_values)
+# sales = fetch_data('sales')
+
+def add_stock(values):
+    insert_3 = "INSERT INTO stock(pid, stock_quantity, created_at) VALUES(%s, %s, %s)"
+    cur.execute(insert_3, values)
+    conn.commit()
 
 
 # Method 2 (take values as parameter but doesn't use placeholders).

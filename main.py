@@ -1,6 +1,6 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for, flash, session
-from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, add_stock
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -40,8 +40,7 @@ def add_products():
         name = request.form['p-name']
         buying_price = request.form['b-price']
         selling_price = request.form['s-price']
-        stock_quantity =request.form['quantity']
-        new_product = (name, buying_price, selling_price, stock_quantity)
+        new_product = (name, buying_price, selling_price)
         insert_products(new_product)
         return redirect(url_for('products'))
     
@@ -60,7 +59,25 @@ def make_sales():
         new_sale = (product_id, quantity)
         insert_sales(new_sale)
         return redirect(url_for('sales'))
-    
+
+@app.route('/stock')
+@login_required
+def stock():
+    products = fetch_products()
+    stock = add_stock()
+    return render_template('stock.html', products = products)
+
+# @app.route('/add_stock')
+# def add_stock():
+#      if request.method == 'POST' :
+#         pid = request.form['pid']
+#         quantity = request.form['quantity']
+#         new_stock = [pid, quantity]
+#         add_stock(new_stock)
+#         flash("Stock added", "success")
+#         return redirect(url_for('stock'))
+
+
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -119,6 +136,13 @@ def login():
             else:
                 flash('Password incorrect','danger')
     return render_template("login.html")
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('email', None)
+    flash('You have been logged out', 'info')
+    return redirect(url_for('login'))
 
 # Running your application
 app.run(debug=True)
