@@ -77,7 +77,7 @@ def insert_products(values):
 
 
 def insert_sales(values):
-    insert_2 = "INSERT INTO sales(pid, quantity, created_at) VALUES(%s, %s, %s)"
+    insert_2 = "INSERT INTO sales(pid, quantity, created_at) VALUES(%s, %s, now())"
     cur.execute(insert_2, values)
     conn.commit()
 
@@ -86,8 +86,8 @@ def insert_sales(values):
 # insert_sales(sales_values)
 # sales = fetch_data('sales')
 
-def add_stock(values):
-    insert_3 = "INSERT INTO stock(pid, stock_quantity, created_at) VALUES(%s, %s, %s)"
+def insert_stock(values):
+    insert_3 = "INSERT INTO stock(pid, stock_quantity, created_at) VALUES(%s, %s, now())"
     cur.execute(insert_3, values)
     conn.commit()
 
@@ -190,3 +190,23 @@ def insert_user(user_details):
     cur.execute(query,user_details)
     conn.commit()
     
+# def get_stock(pid):
+#     query = "select stock_quantity from stock where pid = %s"
+#     cur
+
+
+def available_stock(pid):
+    cur.execute("select sum(stock_quantity) from stock where pid = %s",(pid,))
+    total_stock = cur.fetchone()[0] or 0
+    cur.execute("select sum(sales.quantity) from sales where pid = %s",(pid,))
+    total_sold = cur.fetchone()[0] or 0
+    return total_stock - total_sold
+
+def product_name(pid):
+    cur.execute("SELECT name FROM products WHERE id = %s", (pid,))
+    product = cur.fetchone()[0] or "Unknown Prod"
+    return product
+
+def update_prod(values):
+    cur.execute("update products set name = %s, buying_price=%s, selling_price=%s")
+    conn.commit()

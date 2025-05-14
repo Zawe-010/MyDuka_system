@@ -1,6 +1,6 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for, flash, session
-from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, add_stock
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, insert_stock, fetch_stock, available_stock
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -57,26 +57,29 @@ def make_sales():
         product_id= request.form['p-id']
         quantity = request.form['quantity']
         new_sale = (product_id, quantity)
+        stock_available = available_stock(product_id)
+        if stock_available < float(quantity):
+            flash("Insufficient stock","info")
         insert_sales(new_sale)
+        flash("Sale made successfully","success")
         return redirect(url_for('sales'))
 
 @app.route('/stock')
 @login_required
 def stock():
     products = fetch_products()
-    stock = add_stock()
-    return render_template('stock.html', products = products)
+    stock = fetch_stock()
+    return render_template('stock.html', products = products, stock = stock)
 
-# @app.route('/add_stock')
-# def add_stock():
-#      if request.method == 'POST' :
-#         pid = request.form['pid']
-#         quantity = request.form['quantity']
-#         new_stock = [pid, quantity]
-#         add_stock(new_stock)
-#         flash("Stock added", "success")
-#         return redirect(url_for('stock'))
-
+@app.route('/add_stock', methods = ['GET','POST'])
+def add_stock():
+      if request.method == 'POST' :
+         product_id = request.form['p-id']
+         stock_quantity = request.form['quantity']
+         new_stock = (product_id,stock_quantity)
+         insert_stock(new_stock)
+         flash("Stock added successfully", "success")
+         return redirect(url_for('stock'))
 
 @app.route('/dashboard')
 @login_required
