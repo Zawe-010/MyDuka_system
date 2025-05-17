@@ -1,6 +1,6 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for, flash, session
-from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, insert_stock, fetch_stock, available_stock
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, insert_stock, fetch_stock, available_stock, edit_product
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -44,6 +44,18 @@ def add_products():
         insert_products(new_product)
         return redirect(url_for('products'))
     
+@app.route('/update_product',methods=['GET','POST'])
+def update_product():
+    if request.method == 'POST':
+        pid = request.form['pid']
+        name = request.form['name']
+        buying_price = request.form['buying_price']
+        selling_price = request.form['selling_price']
+        edited_product = (name,buying_price,selling_price,pid)
+        edit_product(edited_product)
+        flash("Product Edited successfully","success")
+        return redirect(url_for('products'))
+    
 @app.route('/sales')
 @login_required
 def sales():
@@ -60,6 +72,8 @@ def make_sales():
         stock_available = available_stock(product_id)
         if stock_available < float(quantity):
             flash("Insufficient stock","info")
+            return redirect(url_for('sales'))
+        
         insert_sales(new_sale)
         flash("Sale made successfully","success")
         return redirect(url_for('sales'))
