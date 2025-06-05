@@ -4,17 +4,21 @@
 
 {% block content %}
 <!-- Dashboard Description -->
-<div class="mb-4">
-    <p class="fs-5">
-        Welcome to your Dashboard! Here you can view analytics for product sales, profit, and overall performance.
-        Use the charts below to analyze the sales and profit data per product, as well as a daily breakdown of sales and
-        profit.
+    <p>
+        Welcome to the Dashboard — your central hub for monitoring and analyzing business performance. This page
+        presents an overview of your store's key metrics, helping you make informed decisions about products, pricing,
+        stock levels, and sales strategies.
+
+        Below you'll find two interactive charts:
+    <ul>
+        <li><strong>Bar Chart:</strong> Displays the total sales and profit generated for each product. This helps you
+            identify which products are driving revenue and which may need attention.</li>
+        <li><strong>Line Chart:</strong> Tracks daily trends in both sales and profit. This allows you to analyze
+            patterns over time and adjust your strategy accordingly.</li>
+    </ul>
+    All visualized data is pulled directly from the latest transactions in your store, ensuring you always have the most
+    accurate and current insights at a glance.
     </p>
-    <p class="fs-5">
-        The data shown is up-to-date and reflects the most recent transactions in your store. You can use this data to
-        make informed decisions on stock, pricing, and promotions.
-    </p>
-</div>
 
 <canvas id="bar-chart" width="800" height="450"></canvas>
 <canvas id="line-chart" width="800" height="450"></canvas>

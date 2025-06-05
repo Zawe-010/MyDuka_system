@@ -2,7 +2,22 @@
 {% block title %} Products {% endblock %}
 {% block content %}
 
-<p>This is the products page</p>
+<p>
+    Welcome to the Products Page. This section allows you to efficiently manage your product inventory within
+    the system. You can view a comprehensive list of all products currently stored in the database, along with their
+    corresponding buying and selling prices.
+    <br><br>
+    To add a new product, simply click on the <strong>"Add Product"</strong> button. A pop-up form will appear, allowing
+    you to enter the product's name and pricing details. After submission, the product will be added to the table below.
+    <br><br>
+    Each product in the list includes an <strong>"Edit Product"</strong> button. This enables you to update the
+    product's name, buying price, or selling price directly from a modal form without navigating away from the page.
+    This feature ensures easy and quick updates to your inventory data.
+    <br><br>
+    This page is designed to streamline your inventory management workflow by providing a clear overview of your
+    products and offering tools for real-time updates.
+</p>
+
 
 <!-- Button trigger modal -->
 <div class="mt-4 mb-4">
@@ -50,7 +65,7 @@
 </div>
 
 <div>
-    <table id="example" class="table table-striped">
+    <table id="example" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Product ID</th>

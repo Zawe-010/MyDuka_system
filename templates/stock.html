@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 {% block title %} Stock {% endblock %}
 {% block content %}
-<p> This is the stock page</p>
+
+<p>
+    Welcome to the Stock Page. This section allows you to monitor and manage the quantity of products
+    available in your inventory. You can view all stock entries, track when stock was added, and ensure inventory levels
+    are maintained accurately.
+    <br><br>
+    To add stock for an existing product, click the <strong>"Add Stock"</strong> button. A modal form will appear where
+    you can:
+<ul>
+    <li>Select the product from the dropdown menu.</li>
+    <li>Enter the quantity of new stock being added.</li>
+</ul>
+After submission, the stock record will be stored and reflected in the table below.
+<br><br>
+The stock table displays each stock entry with the following details:
+<ul>
+    <li><strong>Stock ID:</strong> A unique identifier for the stock entry.</li>
+    <li><strong>Product ID:</strong> The ID of the product associated with this stock entry.</li>
+    <li><strong>Stock Quantity:</strong> The amount of stock added.</li>
+    <li><strong>Created At:</strong> The timestamp indicating when the stock entry was made.</li>
+</ul>
+Use this page to maintain an accurate and up-to-date view of your product inventory levels.
+</p>
+
 
 <!-- Button trigger modal -->
 <div class="mt-4 mb-4">
