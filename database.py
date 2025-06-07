@@ -199,7 +199,7 @@ def get_stock(pid):
 
 def available_stock(pid):
     cur.execute("select coalesce(sum(stock_quantity),0) from stock where pid = %s",(pid,))
-    total_stock = cur.fetchone()[0]
+    total_stock = cur.fetchone()[0] or 0
     cur.execute("select coalesce(sum(sales.quantity),0) from sales where pid = %s",(pid,))
     total_sold = cur.fetchone()[0] or 0
     return total_stock - total_sold
@@ -212,3 +212,68 @@ def product_name(pid):
 def edit_product(values):
     cur.execute("update products set name = %s, buying_price = %s, selling_price = %s where id = %s", values)
     conn.commit()
+
+def getnumberofproducts():
+    cur.execute(" select * from products")
+    products=cur.fetchall()
+    no_products= len(products)
+    return no_products
+
+def getnumberofsales():
+    cur.execute(" select * from sales")
+    sales=cur.fetchall()
+    no_sales= len(sales)
+    return no_sales
+
+def get_stock_count():
+    cur.execute("SELECT COALESCE(SUM(stock_quantity), 0) FROM stock")
+    total = cur.fetchone()[0]
+    return total
+
+
+def get_sales_today():
+    today = datetime.now().date()
+    cur.execute("""
+        SELECT COALESCE(SUM(products.selling_price * sales.quantity), 0)
+        FROM sales
+        JOIN products ON sales.pid = products.id
+        WHERE DATE(sales.created_at) = %s
+    """, (today,))
+    total_sales = cur.fetchone()[0]
+    return total_sales
+
+
+def get_sales_this_month():
+    cur.execute("""
+        SELECT COALESCE(SUM(products.selling_price * sales.quantity), 0)
+        FROM sales
+        JOIN products ON sales.pid = products.id
+        WHERE EXTRACT(MONTH FROM sales.created_at) = EXTRACT(MONTH FROM CURRENT_DATE)
+          AND EXTRACT(YEAR FROM sales.created_at) = EXTRACT(YEAR FROM CURRENT_DATE)
+    """)
+    total_sales = cur.fetchone()[0]
+    return total_sales
+
+
+def get_profit_today():
+    today = datetime.now().date()
+    cur.execute("""
+        SELECT COALESCE(SUM((products.selling_price - products.buying_price) * sales.quantity), 0)
+        FROM sales
+        JOIN products ON sales.pid = products.id
+        WHERE DATE(sales.created_at) = %s
+    """, (today,))
+    profit = cur.fetchone()[0]
+    return profit
+
+
+def get_profit_this_month():
+    cur.execute("""
+        SELECT COALESCE(SUM((products.selling_price - products.buying_price) * sales.quantity), 0)
+        FROM sales
+        JOIN products ON sales.pid = products.id
+        WHERE EXTRACT(MONTH FROM sales.created_at) = EXTRACT(MONTH FROM CURRENT_DATE)
+          AND EXTRACT(YEAR FROM sales.created_at) = EXTRACT(YEAR FROM CURRENT_DATE)
+    """)
+    profit = cur.fetchone()[0]
+    return profit

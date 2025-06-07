@@ -2,34 +2,23 @@
 {% block title %} Sales {% endblock %}
 {% block content %}
 
-<p>
-    Welcome to the Sales Page. This page allows you to track and record product sales efficiently. Each sale
-    entry is logged with a reference to the product sold, the quantity, and the date it was created.
-    <br><br>
-    To record a new sale, click the <strong>"Add Sale"</strong> button. A modal will appear where you can:
-<ul>
-    <li>Select a product from the dropdown list of existing inventory.</li>
-    <li>Enter the quantity of the product sold.</li>
-</ul>
-Once submitted, the sale is automatically added to the table below for your records.
-<br><br>
-The sales table provides a real-time overview of all recorded transactions, including:
-<ul>
-    <li><strong>Sales ID:</strong> A unique identifier for each sale.</li>
-    <li><strong>Product ID:</strong> References the product sold.</li>
-    <li><strong>Quantity:</strong> Number of units sold.</li>
-    <li><strong>Created At:</strong> Timestamp of when the sale was recorded.</li>
-</ul>
-Use this page to maintain accurate sales records, analyze trends, and ensure seamless inventory updates.
-</p>
+<div class="container-fluid"
+    style="background: linear-gradient(to right, #764ba2, #667eea); color: white; padding: 30px 20px; margin-top: 0px; border-radius: 15px 15px 15px 15px;">
+    <h2>Sales Overview</h2>
+    <h5>Track all your sales records in one place.</h5>
+    <p>Maintain accurate records, analyze sales trends, and ensure seamless inventory updates through each transaction.
+    </p>
 
-
-<!-- Button trigger modal -->
-<div class="mt-4 mb-4">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Sale
-    </button>
+    <!-- Button trigger modal -->
+    <div class="mt-4 mb-4 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" style="height: fit-content; margin-top: -70px;"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Sale
+        </button>
+    </div>
 </div>
+
+<br>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

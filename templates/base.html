@@ -12,30 +12,30 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar with gradient background -->
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #764ba2, #667eea);">
         <div class="container">
-            <a class="navbar-brand" href="#">MyDuka</a>
+            <a class="navbar-brand fw-bold" href="#" style="color: white;">MyDuka</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/">Home</a>
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-link" href="/" style="color: white;">Home</a>
                     {% if session.email %}
-                    <a class="nav-link" href="/products">Products</a>
-                    <a class="nav-link" href="/sales">Sales</a>
-                    <a class="nav-link" href="/stock">Stock</a>
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/logout">Logout</a>
-                    {% else %}
-                    <a class="nav-link" href="/register">Register</a>
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/products" style="color: white;">Products</a>
+                    <a class="nav-link" href="/sales" style="color: white;">Sales</a>
+                    <a class="nav-link" href="/stock" style="color: white;">Stock</a>
+                    <a class="nav-link" href="/dashboard" style="color: white;">Dashboard</a>
+                    <a class="nav-link float-end" href="/logout" style=" margin-left: 85%; color: white;">Logout</a>                    {% else %}
+                    <a class="nav-link" href="/register" style="color: white;">Register</a>
+                    <a class="nav-link" href="/login" style="color: white;">Login</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
+
 
     <!-- Main Content -->
     <main class="flex-grow-1 container py-4">
@@ -58,16 +58,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <footer class="text-white text-center py-3 mt-auto" style="background: linear-gradient(to right, #667eea, #764ba2);">
         <div class="container">
             <p class="mb-1">&copy; {{ current_year | default(2025) }} MyDuka. All rights reserved.</p>
             <small>
-                <a href="#" class="text-light text-decoration-none me-3">Privacy</a>
-                <a href="#" class="text-light text-decoration-none me-3">Terms</a>
-                <a href="mailto:support@myduka.com" class="text-light text-decoration-none">Contact</a>
+                <a href="#" class="text-light text-decoration-none me-3" style="color: white;">Privacy</a>
+                <a href="#" class="text-light text-decoration-none me-3" style="color: white;">Terms</a>
+                <a href="mailto:support@myduka.com" class="text-light text-decoration-none"
+                    style="color: white;">Contact</a>
             </small>
         </div>
     </footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

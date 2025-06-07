@@ -2,36 +2,22 @@
 {% block title %} Stock {% endblock %}
 {% block content %}
 
-<p>
-    Welcome to the Stock Page. This section allows you to monitor and manage the quantity of products
-    available in your inventory. You can view all stock entries, track when stock was added, and ensure inventory levels
-    are maintained accurately.
-    <br><br>
-    To add stock for an existing product, click the <strong>"Add Stock"</strong> button. A modal form will appear where
-    you can:
-<ul>
-    <li>Select the product from the dropdown menu.</li>
-    <li>Enter the quantity of new stock being added.</li>
-</ul>
-After submission, the stock record will be stored and reflected in the table below.
-<br><br>
-The stock table displays each stock entry with the following details:
-<ul>
-    <li><strong>Stock ID:</strong> A unique identifier for the stock entry.</li>
-    <li><strong>Product ID:</strong> The ID of the product associated with this stock entry.</li>
-    <li><strong>Stock Quantity:</strong> The amount of stock added.</li>
-    <li><strong>Created At:</strong> The timestamp indicating when the stock entry was made.</li>
-</ul>
-Use this page to maintain an accurate and up-to-date view of your product inventory levels.
-</p>
+<div class="container-fluid"
+    style="background: linear-gradient(to right, #764ba2, #667eea); color: white; padding: 30px 20px; margin-top: 0px; border-radius: 15px 15px 15px 15px;">
+    <h2>Stock Overview</h2>
+    <h5>Monitor and manage your product inventory effectively.</h5>
+    <p>Maintain an accurate and up-to-date view of your stock entries to avoid shortages or overstocking.</p>
 
-
-<!-- Button trigger modal -->
-<div class="mt-4 mb-4">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Stock
-    </button>
+    <!-- Button trigger modal -->
+    <div class="mt-4 mb-4 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" style="height: fit-content; margin-top: -70px;"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add Stock
+        </button>
+    </div>
 </div>
+
+<br>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

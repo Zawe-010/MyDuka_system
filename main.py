@@ -1,12 +1,14 @@
 # Importing flask to use it
 from flask import Flask , render_template, request, redirect, url_for, flash, session
-from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, insert_stock, fetch_stock, available_stock, edit_product
+from database import fetch_products,fetch_sales,insert_products,insert_sales, profit_per_product, profit_per_day, sales_per_product, sales_per_day, check_user, insert_user, insert_stock, fetch_stock, available_stock, edit_product, getnumberofproducts, getnumberofsales, get_stock_count, get_sales_today, get_sales_this_month, get_profit_today, get_profit_this_month
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
 # Instantiate your application - initialization of Flask
 # A flask instance
 app = Flask(__name__)
+
+app.secret_key = 'jbl2468'
 
 # A bycrypt instance
 bcrypt = Bcrypt(app)
@@ -32,7 +34,8 @@ def login_required(f):
 @login_required
 def products():
     products = fetch_products()
-    return render_template("products.html", products = products)
+    no_products=getnumberofproducts()
+    return render_template("products.html", products = products, no_products = no_products)
 
 @app.route('/add_products', methods=['POST'])
 def add_products():
@@ -61,7 +64,8 @@ def update_product():
 def sales():
     sales = fetch_sales()
     products = fetch_products()
-    return render_template("sales.html", sales = sales, products = products)
+    no_sales = getnumberofsales()
+    return render_template("sales.html", sales = sales, products = products, no_sales = no_sales)
 
 @app.route('/make_sales', methods=['POST'])
 def make_sales():
@@ -83,7 +87,8 @@ def make_sales():
 def stock():
     products = fetch_products()
     stock = fetch_stock()
-    return render_template('stock.html', products = products, stock = stock)
+    total = get_stock_count()
+    return render_template('stock.html', products = products, stock = stock, total = total)
 
 @app.route('/add_stock', methods = ['GET','POST'])
 def add_stock():
@@ -114,7 +119,8 @@ def dashboard():
     s_day = [float(i[1]) for i in sales_day]
     return render_template("dashboard.html",
                            product_name = product_name, p_profit = p_profit, p_sales = p_sales,
-                           date = date, p_day = p_day, s_day = s_day)
+                           date = date, p_day = p_day, s_day = s_day, no_products=getnumberofproducts(),
+        )
 
 @app.route('/register', methods = ['GET','POST'])
 def register():
